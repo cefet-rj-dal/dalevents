@@ -148,7 +148,7 @@ print(experiment)
 
 ```
 ##       method dataset                              series elapsed_time_fit elapsed_time_detection accuracy
-## 1 hanr_arima Numenta realAdExchange_exchange-3_cpc_resul         24.81186               2.587266 0.996749
+## 1 hanr_arima Numenta realAdExchange_exchange-3_cpc_resul         24.94742               2.244101 0.996749
 ##   precision    recall        F1
 ## 1 0.3333333 0.6666667 0.4444444
 ```

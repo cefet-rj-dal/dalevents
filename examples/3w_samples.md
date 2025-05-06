@@ -253,10 +253,10 @@ head(experiment)
 ```
 
 ```
-##       method dataset                                     series elapsed_time_fit elapsed_time_detection
-## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP                0                      0
-##   accuracy precision recall F1
-## 1        0         0      0  0
+##       method dataset                                     series elapsed_time_fit elapsed_time_detection accuracy
+## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP                0                      0        0
+##   precision recall F1
+## 1         0      0  0
 ```
 Detection steps
 
@@ -342,10 +342,10 @@ print(experiment)
 ```
 
 ```
-##       method dataset                                     series elapsed_time_fit elapsed_time_detection
-## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP         8.696036              0.2482224
-##    accuracy precision recall  F1
-## 1 0.9996801         0      0 NaN
+##       method dataset                                     series elapsed_time_fit elapsed_time_detection  accuracy
+## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP         4.436345              0.2636576 0.9996801
+##   precision recall  F1
+## 1         0      0 NaN
 ```
 
 ### SoftEd Evaluation
