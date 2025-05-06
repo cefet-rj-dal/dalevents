@@ -1,0 +1,188 @@
+---
+title: "UCR Anomaly Archive"
+output: html_notebook
+---
+Real data from human medicine, biology, meteorology and industry
+
+* Univariate series with labeled anomalies
+* Recommended use: univariate anomaly detection
+
+Source: https://paperswithcode.com/dataset/ucr-anomaly-archive
+
+
+## Load series
+```{r}
+library(dalevents)
+library(daltoolbox)
+library(harbinger)
+
+
+## Load series ----------------------
+data(ucr)
+```
+
+Selecting a well as example
+```{r}
+#Selecting
+series <- ucr$`004_UCR_Anomaly_DISTORTEDBIDMC1_2500_5400_5600.RData`
+plot(as.ts(series))
+```
+
+
+## Labels adjust
+
+Understanding the dataset, including the data types and intended use, is essential to ensuring accurate interpretation of the labels. In the UCR Anomaly Archive, the labels identified in the nomenclature of each series identify a range in which at least one point should be found as an anomaly. These labels were developed in collaboration with experts and evaluated for complexity to represent rare events. For event detection purposes, the labels are being adjusted to consider all points in the range as events.
+
+The name of each series in this dataset ends with three numbers separated by "_". Each number indicates a metadata of the series, as described below.
+
+* Example: 004_UCR_Anomaly_DISTORTEDBIDMC1_2500_5400_5600
+* First number: 2500 -> Indicates the beginning of the data to be used to test event detection methods
+* Second number: 5400 -> Indicates the beginning of the anomalous region
+* Third number: 5600 -> Indicates the end of the anomalous region
+
+
+```{r}
+#Labels
+#IDX = 5400_5600 -> Range defined in dataset documentation
+series$event <- 0
+series$event[5400:5600] <- 1
+names(series) <- c("value", "event")
+plot(as.ts(series))
+```
+
+
+UCR Anomaly Archive recommended sample: Observations containing normal data and anomalies
+
+```{r}
+#Sample
+#Test: 2500
+start = 2500
+
+series <- series[(start+1):nrow(series),]
+plot(as.ts(series))
+```
+
+
+
+## Preprocessing
+
+* Normalize data
+
+```{r}
+preproc <- ts_norm_gminmax()
+preproc <- fit(preproc, series$value)
+series$value <- transform(preproc, series$value)
+
+head(series)
+plot(as.ts(series))
+```
+
+
+## Event detection experiment
+
+Creating a data frame to organize experiment results.
+
+```{r}
+#Experiments results organization
+experiment <- data.frame(method="hanr_arima",
+                         dataset="UCR",
+                         series="BIDMC1",
+                         elapsed_time_fit=0,
+                         elapsed_time_detection=0,
+                         accuracy=0,
+                         precision=0,
+                         recall=0,
+                         F1=0)
+
+head(experiment)
+```
+Detection steps
+```{r}
+#Establishing arima method
+model <- hanr_arima()
+```
+
+
+```{r}
+#Fitting the model
+s <- Sys.time()
+model <- fit(model, series$value)
+t_fit <- Sys.time()-s
+```
+
+
+```{r}
+#Making detections
+s <- Sys.time()
+detection <- detect(model, series$value)
+t_det <- Sys.time()-s
+```
+
+
+## Results analysis
+
+
+```{r}
+#Filtering detected events
+print(detection |> dplyr::filter(event==TRUE))
+```
+
+Visual analysis
+```{r}
+#Ploting the results
+grf <- har_plot(model, series$value, detection, series$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+#Evaluating the detection metrics
+ev <- evaluate(model, detection$event, series$event)
+print(ev$confMatrix)
+```
+
+Recording experiment results
+```{r}
+#Experiment update
+#Time
+experiment$elapsed_time_fit[1] <- as.numeric(t_fit)*60
+experiment$elapsed_time_detection[1] <- as.numeric(t_det)*60
+
+#Metrics
+experiment$accuracy[1] <- ev$accuracy
+experiment$precision[1] <- ev$precision
+experiment$recall[1] <- ev$recall
+experiment$F1[1] <- ev$F1
+
+print(experiment)
+```
+
+
+### SoftEd Evaluation
+To analyze the results considering temporal tolerance, softED smoothed metrics can be used, as performed below.
+
+```{r}
+s=(5400-5600)*-1
+ev_soft <- evaluate(har_eval_soft(sw=s), detection$event, as.logical(series$event))
+print(ev_soft$confMatrix)
+```
+
+```{r}
+print(ev_soft$accuracy)
+print(ev_soft$F1)
+```
+
+### Add new series to experiment 
+Repeat detection steps
+
+* Add new rows to the `experiment` data frame
+* Run detection steps (create model, fit and detect) for the new series
+* Update `experiment` with the new series result
+  * Repeated steps for didactic purposes
+  * WARNING: In real experimental situations, variable selection and repetition of detection steps should be encapsulated in a loop or function
+
+### Experiment record
+The retain experiments data record results
+
+* Save detection results: Save `detection` object after detection of each series
+* Save experiment: Save `experiment` object after finishing the complete experiment
