@@ -17,7 +17,7 @@ https://github.com/cefet-rj-dal/dalevents/wik
 
 ## Examples of usage
 
-https://github.com/cefet-rj-dal/dalevents/examples
+[https://github.com/cefet-rj-dal/dalevents/examples](https://github.com/cefet-rj-dal/dalevents/tree/main/examples)
 
 
 
