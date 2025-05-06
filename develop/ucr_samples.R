@@ -13,43 +13,38 @@ data(ucr)
 
 
 ## Univariate series selection ----------------------
-series <- ucr$`005_UCR_Anomaly_DISTORTEDCIMIS44AirTemperature1_4000_5391_5392.RData`$DISTORTEDCIMIS44AirTemperature1_4000_5391_5392
-series <- ucr$`023_UCR_Anomaly_DISTORTEDGP711MarkerLFM5z5_5000_8612_8716.RData`$DISTORTEDGP711MarkerLFM5z5_5000_8612_8716
-series <- ucr$`003_UCR_Anomaly_DISTORTED3sddb40_35000_46600_46900.RData`$DISTORTED3sddb40_35000_46600_46900
-series <- ucr$`010_UCR_Anomaly_DISTORTEDCIMIS44AirTemperature6_4000_6006_6054.RData`$DISTORTEDCIMIS44AirTemperature6_4000_6006_6054
-series <- ucr$`034_UCR_Anomaly_DISTORTEDInternalBleeding6_1500_3474_3629.RData`$DISTORTEDInternalBleeding6_1500_3474_3629 #avaliar
-series <- ucr$`069_UCR_Anomaly_DISTORTEDinsectEPG5_3200_8500_8501.RData`$DISTORTEDinsectEPG5_3200_8500_8501
-
-
+#Selecting
+series <- ucr$`004_UCR_Anomaly_DISTORTEDBIDMC1_2500_5400_5600.RData`
 plot(as.ts(series))
 
 
 #Labels
-#IDX = 5391_5392
-#IDX = 3474_3629
-#8500_8501
-labels <- data.frame(event = rep(0, length(series)))
-labels$event[8500:8501] <- 1
+#IDX = 5400_5600 -> Range defined in dataset documentation
+series$event <- 0
+series$event[5400:5600] <- 1
+names(series) <- c("value", "event")
+plot(as.ts(series))
 
 #Sample
-#Train: 1-3200
-end = 3201
-series <- series[end:length(series),]
+#Test: 2500
+start = 2500
+
+series <- series[(start+1):nrow(series),]
 plot(as.ts(series))
 
 ## Preprocessing ----------------------
 preproc <- ts_norm_gminmax()
-preproc <- fit(preproc, series)
-series <- transform(preproc, series)
-
+preproc <- fit(preproc, series$value)
+series$value <- transform(preproc, series$value)
 head(series)
+
 plot(as.ts(series))
 
 ## Event detection experiment ----------------------
 #Experiments results organization
 experiment <- data.frame(method="hanr_arima",
                          dataset="UCR",
-                         series="AirTemperature1",
+                         series="BIDMC1",
                          elapsed_time_fit=0,
                          elapsed_time_detection=0,
                          accuracy=0,
@@ -65,12 +60,12 @@ model <- hanr_arima()
 
 #Fitting the model
 s <- Sys.time()
-model <- fit(model, series)
+model <- fit(model, series$value)
 t_fit <- Sys.time()-s
 
 #Making detections
 s <- Sys.time()
-detection <- detect(model, series)
+detection <- detect(model, series$value)
 t_det <- Sys.time()-s
 
 
@@ -79,11 +74,11 @@ t_det <- Sys.time()-s
 print(detection |> dplyr::filter(event==TRUE))
 
 #Ploting the results
-grf <- har_plot(model, series, detection, labels$event)
+grf <- har_plot(model, series$value, detection, series$event)
 plot(grf)
 
 #Evaluating the detection metrics
-ev <- evaluate(model, detection$event, labels$event)
+ev <- evaluate(model, detection$event, series$event)
 print(ev$confMatrix)
 
 
@@ -100,88 +95,16 @@ experiment$F1[1] <- ev$F1
 
 print(experiment)
 
+#SoftEd Evaluation
+s=(5400-5600)*-1
+ev_soft <- evaluate(har_eval_soft(sw=s), detection$event, as.logical(series$event))
+print(ev_soft$confMatrix)
+
+print(ev_soft$accuracy)
+print(ev_soft$F1)
 
 ## Record result ----------------------
-#out_file <- "develop/experiments/result_ucr_AirTemperature1_arima.RData"
-#save(detection, file=out_file, compress = TRUE)
-
-
-## Add new series to experiment ----------------------
-series <- ucr$`023_UCR_Anomaly_DISTORTEDGP711MarkerLFM5z5_5000_8612_8716.RData`$DISTORTEDGP711MarkerLFM5z5_5000_8612_8716
-plot(as.ts(series))
-
-#Labels
-#8612_8716
-labels <- data.frame(event = rep(0, length(series)))
-labels$event[8612:8716] <- 1
-
-
-## Preprocessing ----------------------
-preproc <- ts_norm_gminmax()
-preproc <- fit(preproc, series)
-series <- transform(preproc, series)
-
-head(series)
-plot(as.ts(series))
-
-#Update experiments
-experiment <- rbind(experiment,
-                    c(method="hanr_arima",
-                      dataset="UCR",
-                      series="MarkerLFM5z5",
-                      elapsed_time_fit=0,
-                      elapsed_time_detection=0,
-                      accuracy=0,
-                      precision=0,
-                      recall=0,
-                      F1=0))
-
-print(experiment)
-
-
-#Repeat detection steps
-#   Repeated steps for didactic reasons
-#   WARNING: In real experimental situations, variable selection and repetition
-#   of detection steps should be encapsulated in a loop or a function
-
-#Detection steps
-#Establishing arima method
-model <- hanr_arima()
-
-#Fitting the model
-s <- Sys.time()
-model <- fit(model, series)
-t_fit <- Sys.time()-s
-
-#Making detections
-s <- Sys.time()
-detection <- detect(model, series)
-t_det <- Sys.time()-s
-
-
-# Results analysis ----------------------
-#Ploting the results
-grf <- har_plot(model, series, detection, labels$event)
-plot(grf)
-#Evaluating the detection metrics
-ev <- evaluate(model, detection$event, labels$event)
-print(ev$confMatrix)
-
-#Experiment update
-#Time
-experiment$elapsed_time_fit[2] <- as.numeric(t_fit)*60
-experiment$elapsed_time_detection[2] <- as.numeric(t_det)*60
-#Metrics
-experiment$accuracy[2] <- ev$accuracy
-experiment$precision[2] <- ev$precision
-experiment$recall[2] <- ev$recall
-experiment$F1[2] <- ev$F1
-
-print(experiment)
-
-
-#Record result
-#out_file <- "develop/experiments/result_ucr_MarkerLFM5z5_arima.RData"
+#out_file <- "develop/experiments/result_ucr_BIDMC1_arima.RData"
 #save(detection, file=out_file, compress = TRUE)
 
 #Record overall results
