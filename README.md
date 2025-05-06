@@ -8,7 +8,7 @@ Repository for organizing datasets used for developing and testing methods for t
 | Dataset | Labels  | Number of series | Content | Files and Code / Documentation | Origin URL |
 | ------- | ------- | ---------------- | ------- | ------------------- | ------ |
 | Gecco Challenge | Yes | 9 | Data collection for water quality monitoring | [Gecco Example](https://github.com/cefet-rj-dal/dalevents/blob/main/examples/gecco_samples.md) | [Gecco Challenge 2018](https://www.spotseven.de/gecco/gecco-challenge) |
-| Numenta | Yes | 58 | Cloud services and synthetic data | [Numenta Example](https://github.com/cefet-rj-dal/dalevents/blob/main/examples/nab_samples.md) | [Numenta](https://www.numenta.com) |
+| Numenta Anomaly Benchmark | Yes | 58 | Cloud services and synthetic data | [Numenta Example](https://github.com/cefet-rj-dal/dalevents/blob/main/examples/nab_samples.md) | [Numenta](https://www.numenta.com) |
 | UCR Anomaly Archive | Yes | 250 | Real data from human medicine, biology, meteorology and industry | [UCR Example](https://github.com/cefet-rj-dal/dalevents/blob/main/examples/ucr_samples.md) | [UCR Archive](https://paperswithcode.com/dataset/ucr-anomaly-archive) |
 | UCI 3W | Yes | 649 | Oil well drilling | [3W Example](https://github.com/cefet-rj-dal/dalevents/blob/main/examples/3w_samples.md) | [UCI 3W](https://archive.ics.uci.edu/ml/datasets/3W+dataset) |
 | RARE | Yes | 7062 | Memory consumption in cloud services | **Done** / In Progress |[RARE](https://doi.org/10.1145/3416505.3423560) |
