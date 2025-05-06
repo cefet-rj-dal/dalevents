@@ -1,0 +1,21 @@
+Package: dalevents
+Title: DAL Events Datasets
+Version: 1.0.707
+License: MIT + file LICENSE
+Authors@R: 
+  c(
+    person(given = "Janio", family = "Lima", email = "janio.lima@aluno.cefet-rj.br", role = c("aut", "cre")),
+    person(given = "Rebecca", family = "Salles", email = "rebecca.salles@eic.cefet-rj.br", role = "aut"),
+    person(given = "Eduardo", family = "Ogasawara", email = "eogasawara@ieee.org", role = "aut")
+  )
+Description: 
+  Provides a collection of time series datasets for event detection tasks. 
+  This package organizes datasets intended for the development, training, and evaluation of methods for time series event detection. 
+  Each dataset is structured as a 'list' and is accompanied by documentation describing its origin and characteristics. 
+  Priority is given to labeled datasets to support the evaluation of method performance in experimental studies.
+Encoding: UTF-8
+LazyData: true
+LazyDataCompression: xz
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.1.0)
+RoxygenNote: 7.3.2

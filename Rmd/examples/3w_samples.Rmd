@@ -1,0 +1,224 @@
+---
+title: "3W Dataset - Oil wells"
+output: html_notebook
+---
+The first realistic and public dataset with rare undesirable real events in oil wells.
+
+* Multivariate series with labeled change points
+* Recommended use: multivariate or univariate CPD detection
+
+Source: https://archive.ics.uci.edu/ml/datasets/3W+dataset
+
+
+## Load series
+```{r}
+library(dalevents)
+library(daltoolbox)
+library(harbinger)
+
+
+## Load series ----------------------
+data(oil_3w_Type_1)
+```
+
+Selecting a well as example
+
+```{r}
+#Selecting
+data <- oil_3w_Type_1$Type_1$`WELL-00001_20140124213136`
+summary(data)
+```
+
+## Preprocessing
+
+* Remove NA values
+
+```{r}
+#Removing empty variables
+data$T_JUS_CKGL <- NULL
+
+plot(as.ts(data))
+```
+
+* Normalize data
+
+```{r}
+#data <- na.omit(data)
+ts <- data[,1:7]
+
+preproc <- ts_norm_gminmax()
+preproc <- fit(preproc, ts)
+ts <- transform(preproc, ts)
+
+head(ts)
+```
+```{r}
+plot(as.ts(ts))
+```
+
+## Labels adjust
+
+It is essential to understand the dataset, including data types and intended use, to ensure accurate interpretation of labels. In the 3W dataset, the classes represent transitional stages in behavior observed during oil well drilling monitoring. For event detection purposes, the labels are being adjusted to treat each stage transition as a distinct event.
+
+
+```{r}
+
+labels <- as.data.frame(data$class)
+names(labels) <- "class"
+plot(as.ts(labels$class))
+
+labels$cpd <- 0
+head(labels)
+
+#Initial CP
+cp = FALSE
+for (i in 1:nrow(labels)){
+  if (cp == FALSE){
+    if(!is.na(labels$class[i]) && labels$class[i] != 0){
+      print("Ponto de mudança rotulado em:")
+      print(i)
+      labels$cpd[i] <- 1
+      cp = i
+    }
+  }
+}
+
+#Final CP
+i = cp+1
+cp = FALSE
+print(i)
+
+
+for (i in 1018:nrow(labels)){
+  if (cp == FALSE){
+    if(!is.na(labels$class[i]) && labels$class[i] != 101){
+      print("Ponto de mudança rotulado em:")
+      print(i)
+      labels$cpd[i] <- 1
+      cp = i
+    }
+  }
+}
+
+#Count of CP
+sum(labels$cpd)
+
+plot(as.ts(labels$cpd),
+     main = "Change Points")
+```
+
+
+## Univariate series selection
+Select the desired variable directly from preprocessed data.
+
+```{r}
+series <- ts$P_MON_CKP
+plot(as.ts(series))
+```
+
+## Event detection experiment
+
+Creating a data frame to organize experiment results.
+
+```{r}
+#Experiments results organization
+experiment <- data.frame(method="hanr_arima",
+                         dataset="3W",
+                         series="Type_1_WELL_00001_20140124213136_P_MON_CKP",
+                         elapsed_time_fit=0,
+                         elapsed_time_detection=0,
+                         accuracy=0,
+                         precision=0,
+                         recall=0,
+                         F1=0)
+
+head(experiment)
+```
+Detection steps
+```{r}
+#Establishing arima method
+model <- hanr_arima()
+```
+
+
+```{r}
+#Fitting the model
+s <- Sys.time()
+model <- fit(model, series)
+t_fit <- Sys.time()-s
+```
+
+
+```{r}
+#Making detections
+s <- Sys.time()
+detection <- detect(model, series)
+t_det <- Sys.time()-s
+```
+
+
+## Results analysis
+
+
+```{r}
+#Filtering detected events
+print(detection |> dplyr::filter(event==TRUE))
+```
+
+Visual analysis
+```{r}
+#Ploting the results
+grf <- har_plot(model, series, detection, labels$cpd)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+#Evaluating the detection metrics
+ev <- evaluate(model, detection$event, labels$cpd)
+print(ev$confMatrix)
+```
+
+Recording experiment results
+```{r}
+#Experiment update
+#Time
+experiment$elapsed_time_fit[1] <- as.numeric(t_fit)*60
+experiment$elapsed_time_detection[1] <- as.numeric(t_det)*60
+
+#Metrics
+experiment$accuracy[1] <- ev$accuracy
+experiment$precision[1] <- ev$precision
+experiment$recall[1] <- ev$recall
+experiment$F1[1] <- ev$F1
+
+print(experiment)
+```
+
+### SoftEd Evaluation
+To analyze the results considering temporal tolerance, softED smoothed metrics can be used, as performed below.
+
+```{r}
+ev_soft <- evaluate(har_eval_soft(sw=90), detection$event, as.logical(labels$cpd))
+print(ev_soft$confMatrix)
+```
+
+```{r}
+ev_soft$accuracy
+ev_soft$F1
+```
+
+### Add new series to experiment 
+Repeat detection steps
+
+* Add new rows to the `experiment` data frame
+* Run detection steps (create model, fit and detect) for the new series
+* Update `experiment` with the new series result
+  * Repeated steps for didactic purposes
+  * WARNING: In real experimental situations, variable selection and repetition of detection steps should be encapsulated in a loop or function
+
+### Experiment record
+The retain experiments data record results
+
+* Save detection results: Save `detection` object after detection of each series
+* Save experiment: Save `experiment` object after finishing the complete experiment
