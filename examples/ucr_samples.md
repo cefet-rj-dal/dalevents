@@ -127,8 +127,10 @@ head(experiment)
 ```
 
 ```
-##       method dataset series elapsed_time_fit elapsed_time_detection accuracy precision recall F1
-## 1 hanr_arima     UCR BIDMC1                0                      0        0         0      0  0
+##       method dataset series elapsed_time_fit elapsed_time_detection accuracy precision recall
+## 1 hanr_arima     UCR BIDMC1                0                      0        0         0      0
+##   F1
+## 1  0
 ```
 Detection steps
 
@@ -385,8 +387,10 @@ print(experiment)
 ```
 
 ```
-##       method dataset series elapsed_time_fit elapsed_time_detection  accuracy  precision    recall         F1
-## 1 hanr_arima     UCR BIDMC1          146.175               8.778405 0.9569412 0.02312139 0.0199005 0.02139037
+##       method dataset series elapsed_time_fit elapsed_time_detection  accuracy  precision
+## 1 hanr_arima     UCR BIDMC1         150.1576               8.492403 0.9569412 0.02312139
+##      recall         F1
+## 1 0.0199005 0.02139037
 ```
 
 

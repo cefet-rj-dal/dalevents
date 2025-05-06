@@ -1,48 +1,55 @@
 ---
-title: "Numenta Anomaly Benchmark (NAB)  Dataset - Cloud services and synthetic data"
+title: "RARE: a labeled dataset for cloud-native memory anomalies"
 output: html_notebook
 ---
+Cloud-native memory anomalies
 
-NAB is a novel benchmark for evaluating algorithms for anomaly detection in streaming, real-time applications.
+* Multivariate series with labeled anomalies
+* Recommended use: multivariate or univariate event detection
+* WARNING: Example under construction - This dataset is under our analysis for better organization and suggested use.
 
-* Univariate series with labeled anomalies
-* Recommended use: univariate event detection
+Source: https://dl.acm.org/doi/10.1145/3416505.3423560
 
-Source: https://www.numenta.com/
 
 ## Load series
-
-``` r
+```{r}
 library(dalevents)
 library(daltoolbox)
 library(harbinger)
 
 
 ## Load series ----------------------
-data(numenta_realAdExchange)
+data(rare)
 ```
 
 
-Univerariate use - Example 1:
+## Univariate series selection
+Select the desired variable.
 
-``` r
-#Univerariate use
-data <- numenta_realAdExchange$realAdExchange$`exchange-3_cpc_resul`
-plot(as.ts(data))
+```{r}
+series <- rare[2]
+plot(as.ts(series))
 ```
 
-![plot of chunk unnamed-chunk-2](fig/nab_samples/unnamed-chunk-2-1.png)
+## Labels
+```{r}
+series$event <- rare$event
+names(series) <- c("value", "event")
+
+
+plot(as.ts(series))
+```
+
 
 ## Event detection experiment
 
 Creating a data frame to organize experiment results.
 
-
-``` r
+```{r}
 #Experiments results organization
 experiment <- data.frame(method="hanr_arima",
-                         dataset="Numenta",
-                         series="realAdExchange_exchange-3_cpc_resul",
+                         dataset="RARE",
+                         series="kube_pod_status_ready_0",
                          elapsed_time_fit=0,
                          elapsed_time_detection=0,
                          accuracy=0,
@@ -53,35 +60,25 @@ experiment <- data.frame(method="hanr_arima",
 head(experiment)
 ```
 
-```
-##       method dataset                              series elapsed_time_fit
-## 1 hanr_arima Numenta realAdExchange_exchange-3_cpc_resul                0
-##   elapsed_time_detection accuracy precision recall F1
-## 1                      0        0         0      0  0
-```
-
 Detection steps
-
-``` r
+```{r}
 #Establishing arima method
 model <- hanr_arima()
 ```
 
 
-
-``` r
+```{r}
 #Fitting the model
 s <- Sys.time()
-model <- fit(model, data$value)
+model <- fit(model, series$value)
 t_fit <- Sys.time()-s
 ```
 
 
-
-``` r
+```{r}
 #Making detections
 s <- Sys.time()
-detection <- detect(model, data$value)
+detection <- detect(model, series$value)
 t_det <- Sys.time()-s
 ```
 
@@ -89,54 +86,32 @@ t_det <- Sys.time()-s
 ## Results analysis
 
 
-``` r
+```{r}
 #Filtering detected events
 print(detection |> dplyr::filter(event==TRUE))
 ```
 
-```
-##    idx event    type
-## 1   24  TRUE anomaly
-## 2  174  TRUE anomaly
-## 3  297  TRUE anomaly
-## 4  439  TRUE anomaly
-## 5  977  TRUE anomaly
-## 6 1122  TRUE anomaly
-```
-
 Visual analysis
-
-``` r
+```{r}
 #Ploting the results
-grf <- har_plot(model, data$value, detection, data$event)
+grf <- har_plot(model, series$value, detection, series$event)
 plot(grf)
 ```
 
-![plot of chunk unnamed-chunk-8](fig/nab_samples/unnamed-chunk-8-1.png)
-
 Evaluate metrics
-
-``` r
+```{r}
 #Evaluating the detection metrics
-ev <- evaluate(model, detection$event, data$event)
+ev <- evaluate(model, detection$event, series$event)
 print(ev$confMatrix)
 ```
 
-```
-##           event      
-## detection TRUE  FALSE
-## TRUE      2     4    
-## FALSE     1     1531
-```
-
 Recording experiment results
-
-``` r
-# Experiment update ----------------------
-#Time
+```{r}
 #Experiment update
+#Time
 experiment$elapsed_time_fit[1] <- as.numeric(t_fit)*60
 experiment$elapsed_time_detection[1] <- as.numeric(t_det)*60
+
 #Metrics
 experiment$accuracy[1] <- ev$accuracy
 experiment$precision[1] <- ev$precision
@@ -146,12 +121,21 @@ experiment$F1[1] <- ev$F1
 print(experiment)
 ```
 
+
+### SoftEd Evaluation
+To analyze the results considering temporal tolerance, softED smoothed metrics can be used, as performed below.
+
+```{r}
+ev_soft <- evaluate(har_eval_soft(sw=90), detection$event, as.logical(series$event))
+print(ev_soft$confMatrix)
 ```
-##       method dataset                              series elapsed_time_fit
-## 1 hanr_arima Numenta realAdExchange_exchange-3_cpc_resul         35.83516
-##   elapsed_time_detection accuracy precision    recall        F1
-## 1               2.338843 0.996749 0.3333333 0.6666667 0.4444444
+
+```{r}
+ev_soft$accuracy
+ev_soft$F1
 ```
+
+
 
 ### Add new series to experiment 
 Repeat detection steps
