@@ -1,6 +1,8 @@
 ---
 title: "Gecco Challenge Dataset - Water Quality"
 output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 Data collection for water quality monitoring
 
