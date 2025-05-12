@@ -1,0 +1,103 @@
+---
+title: "RARE: a labeled dataset for cloud-native memory anomalies"
+output: html_notebook
+---
+Cloud-native memory anomalies
+
+* Multivariate series with labeled anomalies
+* Recommended use: multivariate or univariate event detection
+* WARNING: Example under construction - This dataset is under our analysis for better organization and suggested use.
+
+Source: https://dl.acm.org/doi/10.1145/3416505.3423560
+
+
+## Load series
+```{r}
+library(dalevents)
+library(daltoolbox)
+library(harbinger)
+
+
+## Load series ----------------------
+data(rare)
+```
+
+
+## Univariate series selection
+Select the desired variable.
+
+```{r}
+series <- rare[2]
+plot(as.ts(series))
+```
+
+## Labels
+```{r}
+series$event <- rare$event
+names(series) <- c("value", "event")
+
+
+plot(as.ts(series))
+```
+
+
+## Event detection experiment
+
+Detection steps
+```{r}
+#Establishing arima method
+model <- hanr_arima()
+```
+
+
+```{r}
+#Fitting the model
+s <- Sys.time()
+model <- fit(model, series$value)
+t_fit <- Sys.time()-s
+```
+
+
+```{r}
+#Making detections
+s <- Sys.time()
+detection <- detect(model, series$value)
+t_det <- Sys.time()-s
+```
+
+
+## Results analysis
+
+
+```{r}
+#Filtering detected events
+print(detection |> dplyr::filter(event==TRUE))
+```
+
+Visual analysis
+```{r}
+#Ploting the results
+grf <- har_plot(model, series$value, detection, series$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+#Evaluating the detection metrics
+ev <- evaluate(model, detection$event, series$event)
+print(ev$confMatrix)
+```
+
+
+### SoftEd Evaluation
+To analyze the results considering temporal tolerance, softED smoothed metrics can be used, as performed below.
+
+```{r}
+ev_soft <- evaluate(har_eval_soft(sw=90), detection$event, as.logical(series$event))
+print(ev_soft$confMatrix)
+```
+
+```{r}
+ev_soft$accuracy
+ev_soft$F1
+```

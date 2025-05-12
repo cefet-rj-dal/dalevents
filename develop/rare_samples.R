@@ -1,50 +1,52 @@
 ##---------------------------------------------------------------
-## UCR Anomaly Archive
-## Univariate series with labeled anomalies
-## Recommended use: univariate event detection
+## RARE: a labeled dataset for cloud-native memory anomalies
+## Multivariate series with labeled anomalies
+## Recommended use: multivariate or univariate event detection
+## WARNING: Example under construction.
+##      This dataset is under our analysis for better
+##      organization and suggested use.
 ##---------------------------------------------------------------
-
 library(dalevents)
 library(daltoolbox)
 library(harbinger)
 
+
 ## Load series ----------------------
-data(ucr)
+data(rare)
+
+#RARE dataset content analysis ----------------------
+plot(as.ts(rare[,1:10]))
+plot(as.ts(rare[,11:20])) #Flat
+plot(as.ts(rare[,21:30])) #Flat
+plot(as.ts(rare[,31:40]))
+plot(as.ts(rare[,41:50])) #Flat
+plot(as.ts(rare[,51:60])) #Flat
+plot(as.ts(rare[,61:70])) #Flat
+plot(as.ts(rare[,71:80])) #Flat
+plot(as.ts(rare[,81:90]))
+plot(as.ts(rare[,91:100]))
+
+plot(as.ts(rare[,2]))
+plot(as.ts(rare[,89]))
+plot(as.ts(rare[,90]))
 
 
-## Univariate series selection ----------------------
-#Selecting
-series <- ucr$`004_UCR_Anomaly_DISTORTEDBIDMC1_2500_5400_5600.RData`
+#Series selection ----------------------
+series <- rare[2]
 plot(as.ts(series))
 
-
-#Labels
-#IDX = 5400_5600 -> Range defined in dataset documentation
-series$event <- 0
-series$event[5400:5600] <- 1
+series$event <- rare$event
 names(series) <- c("value", "event")
-plot(as.ts(series))
 
-#Sample
-#Test: 2500
-start = 2500
-
-series <- series[(start+1):nrow(series),]
-plot(as.ts(series))
-
-## Preprocessing ----------------------
-preproc <- ts_norm_gminmax()
-preproc <- fit(preproc, series$value)
-series$value <- transform(preproc, series$value)
-head(series)
 
 plot(as.ts(series))
+
 
 ## Event detection experiment ----------------------
 #Experiments results organization
 experiment <- data.frame(method="hanr_arima",
-                         dataset="UCR",
-                         series="BIDMC1",
+                         dataset="RARE",
+                         series="kube_pod_status_ready_0",
                          elapsed_time_fit=0,
                          elapsed_time_detection=0,
                          accuracy=0,
@@ -81,7 +83,6 @@ plot(grf)
 ev <- evaluate(model, detection$event, series$event)
 print(ev$confMatrix)
 
-
 ## Experiment update ----------------------
 #Time
 #Experiment update
@@ -94,19 +95,3 @@ experiment$recall[1] <- ev$recall
 experiment$F1[1] <- ev$F1
 
 print(experiment)
-
-#SoftEd Evaluation
-s=(5400-5600)*-1
-ev_soft <- evaluate(har_eval_soft(sw=s), detection$event, as.logical(series$event))
-print(ev_soft$confMatrix)
-
-print(ev_soft$accuracy)
-print(ev_soft$F1)
-
-## Record result ----------------------
-#out_file <- "develop/experiments/result_ucr_BIDMC1_arima.RData"
-#save(detection, file=out_file, compress = TRUE)
-
-#Record overall results
-#exp_file <- "develop/experiments/ucr_experiments.RData"
-#save(experiment, file=exp_file, compress = TRUE)
