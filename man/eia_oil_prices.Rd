@@ -18,7 +18,7 @@ Spot prices of oil and other liquids such as gasoline, heating oil, diesel, jet 
 Crude oil in Dollars per barrel, other products in Dollars per gallon. Prices are calculated
 by EIA from daily data by taking an unweighted average of the daily closing spot prices
 for a given product over the specified time period.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? No
 }

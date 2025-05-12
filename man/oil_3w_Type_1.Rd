@@ -20,7 +20,7 @@ research experiments by the DAL group (Data Analytics Lab). The series are
 divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 Type 0 removed from this version due to file size.
 Creation date: 2019.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }

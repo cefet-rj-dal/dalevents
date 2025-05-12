@@ -17,9 +17,9 @@ data(rare)
 Data with over 900 metrics generated injecting artificial anomalies
 in real streaming services. Data is organized into over 7000 variables.
 For a detailed list of variables see:
-\href{https://github.com/cefet-rj-dal/event_datasets_etl/blob/main/original_datasets/rare/data/rare_attributes.csv}{RARE Attributes}.
+\href{https://github.com/cefet-rj-dal/dalevents_etl/blob/main/original_datasets/rare/data/rare_attributes.csv}{RARE Attributes}.
 Real data from stream services and artificial labeled anomalies.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }

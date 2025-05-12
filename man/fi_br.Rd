@@ -8,14 +8,14 @@
 A list of time series.
 }
 \source{
-\href{https://github.com/cefet-rj-dal/event_datasets/raw/main/original_datasets/fi_br/data/glossary.xlsx}{Glossary with complete references}
+\href{https://github.com/cefet-rj-dal/dalevents/raw/main/original_datasets/fi_br/data/glossary.xlsx}{Glossary with complete references}
 }
 \usage{
 data(fi_br)
 }
 \description{
 Finance: Securities Price Indexes (Brazil).
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }

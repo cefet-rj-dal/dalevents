@@ -20,7 +20,7 @@ As part of the Numenta Anomaly Benchmark (NAB), this dataset contains
 time series with real and synthetic data. The real data comes from network
 monitoring and cloud computing. On the other hand, synthetic data simulate
 series with or without anomalies.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }

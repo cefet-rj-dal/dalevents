@@ -16,7 +16,7 @@ data(ucr)
 \description{
 Data with 250 series with real world data and synthetic and real anomalies.
 Real data from human medicine, biology, meteorology and industry.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }

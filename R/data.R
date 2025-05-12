@@ -1,3 +1,116 @@
+#' @name gecco
+#' @title Gecco Challenge 2018
+#' @description Data collection for water quality monitoring.
+#'     Data Type:	Water quality. Category:	Environment. Creation Date	2018.
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
+#'     for detailed guidance on using this package and the other datasets available in it.
+#'     Labels available? Yes
+#'
+#' @docType data
+#' @usage data(gecco)
+#' @format A list of time series.
+#' @keywords datasets
+#'
+#'#' @references Genetic and Evolutionary Computation Conference (Gecco), Association for Computing Machinery (ACM)
+#'
+#' @source \href{https://www.spotseven.de/gecco/gecco-challenge}{Gecco Challenge 2018}
+#'
+#' @examples
+#' data(gecco)
+#' serie <- gecco[[1]]
+"gecco"
+
+
+#' @name A1Benchmark
+#' @title A1Benchmark
+#' @description S5 - A Labeled Anomaly Detection Dataset.
+#'     Data Type:	Benchmark A1. Category:	Real data. Creation Date	2021.
+#'     See \href{https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70}{cefet-rj-dal/dalevents}
+#'     for detailed guidance on using this package and the other datasets available in it.
+#'     Labels available? Yes
+#'
+#' @docType data
+#' @usage data(A1Benchmark)
+#' @format A list of time series.
+#' @keywords datasets
+#'
+#'#' @references Yoshihara K, Takahashi K (2022) A simple method for unsupervised anomaly detection: An application to Web time series data. PLoS ONE 17(1).
+#'
+#' @source \href{https://doi.org/10.1371/journal.pone.0262463}{Yahoo dataset, 2021}
+#'
+#' @examples
+#' data(A1Benchmark)
+#' serie <- A1Benchmark[[1]]
+"A1Benchmark"
+
+#' @name A2Benchmark
+#' @title A2Benchmark
+#' @description S5 - A Labeled Anomaly Detection Dataset.
+#'     Data Type:	Benchmark A2. Category:	Synthetic data. Creation Date	2021.
+#'     See \href{https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70}{cefet-rj-dal/dalevents}
+#'     for detailed guidance on using this package and the other datasets available in it.
+#'     Labels available? Yes
+#'
+#' @docType data
+#' @usage data(A2Benchmark)
+#' @format A list of time series.
+#' @keywords datasets
+#'
+#'#' @references Yoshihara K, Takahashi K (2022) A simple method for unsupervised anomaly detection: An application to Web time series data. PLoS ONE 17(1).
+#'
+#' @source \href{https://doi.org/10.1371/journal.pone.0262463}{Yahoo dataset, 2021}
+#'
+#' @examples
+#' data(A2Benchmark)
+#' serie <- A2Benchmark[[1]]
+"A2Benchmark"
+
+#' @name A3Benchmark
+#' @title A3Benchmark
+#' @description S5 - A Labeled Anomaly Detection Dataset.
+#'     Data Type:	Benchmark A3. Category:	Synthetic data with outliers. Creation Date	2021.
+#'     See \href{https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70}{cefet-rj-dal/dalevents}
+#'     for detailed guidance on using this package and the other datasets available in it.
+#'     Labels available? Yes
+#'
+#' @docType data
+#' @usage data(A3Benchmark)
+#' @format A list of time series.
+#' @keywords datasets
+#'
+#'#' @references Yoshihara K, Takahashi K (2022) A simple method for unsupervised anomaly detection: An application to Web time series data. PLoS ONE 17(1).
+#'
+#' @source \href{https://doi.org/10.1371/journal.pone.0262463}{Yahoo dataset, 2021}
+#'
+#' @examples
+#' data(A3Benchmark)
+#' serie <- A3Benchmark[[1]]
+"A3Benchmark"
+
+#' @name A4Benchmark
+#' @title A4Benchmark
+#' @description S5 - A Labeled Anomaly Detection Dataset.
+#'     Data Type:	Benchmark A3. Category:	Synthetic data with anomalies and change points. Creation Date	2021.
+#'     See \href{https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70}{cefet-rj-dal/dalevents}
+#'     for detailed guidance on using this package and the other datasets available in it.
+#'     Labels available? Yes
+#'
+#' @docType data
+#' @usage data(A4Benchmark)
+#' @format A list of time series.
+#' @keywords datasets
+#'
+#'#' @references Yoshihara K, Takahashi K (2022) A simple method for unsupervised anomaly detection: An application to Web time series data. PLoS ONE 17(1).
+#'
+#' @source \href{https://doi.org/10.1371/journal.pone.0262463}{Yahoo dataset, 2021}
+#'
+#' @examples
+#' data(A4Benchmark)
+#' serie <- A4Benchmark[[1]]
+"A4Benchmark"
+
+
+
 #' @name oil_3w_Type_1
 #' @title Oil wells dataset - Type 1
 #' @description
@@ -7,7 +120,7 @@
 #'     divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 #'     Type 0 removed from this version due to file size.
 #'     Creation date: 2019.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -33,7 +146,7 @@
 #'     research experiments by the DAL group (Data Analytics Lab). The series are
 #'     divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 #'     Creation date: 2019.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -59,7 +172,7 @@
 #'     research experiments by the DAL group (Data Analytics Lab). The series are
 #'     divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 #'     Creation date: 2019.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -85,7 +198,7 @@
 #'     research experiments by the DAL group (Data Analytics Lab). The series are
 #'     divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 #'     Creation date: 2019.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -111,7 +224,7 @@
 #'     research experiments by the DAL group (Data Analytics Lab). The series are
 #'     divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 #'     Creation date: 2019.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -137,7 +250,7 @@
 #'     research experiments by the DAL group (Data Analytics Lab). The series are
 #'     divided into 7 groups (Type_0, Type_1, Type_2, Type_5, Type_6, Type_7 and Type_8).
 #'     Creation date: 2019.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -155,35 +268,11 @@
 #' serie <- oil_3w_Type_8[[1]]
 "oil_3w_Type_8"
 
-
-#' @name gecco
-#' @title Gecco Challenge 2018
-#' @description Data collection for water quality monitoring.
-#'     Data Type:	Water quality. Category:	Environment. Creation Date	2018.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
-#'     for detailed guidance on using this package and the other datasets available in it.
-#'     Labels available? Yes
-#'
-#' @docType data
-#' @usage data(gecco)
-#' @format A list of time series.
-#' @keywords datasets
-#'
-#'#' @references Genetic and Evolutionary Computation Conference (Gecco), Association for Computing Machinery (ACM)
-#'
-#' @source \href{https://www.spotseven.de/gecco/gecco-challenge}{Gecco Challenge 2018}
-#'
-#' @examples
-#' data(gecco)
-#' serie <- gecco[[1]]
-"gecco"
-
-
 #' @name mortality_cnes
 #' @title Child mortality dataset
 #' @description Child mortality dataset. Data for assessing infant mortality,
 #'     an important health indicator.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -206,7 +295,7 @@
 #'     Crude oil in Dollars per barrel, other products in Dollars per gallon. Prices are calculated
 #'     by EIA from daily data by taking an unweighted average of the daily closing spot prices
 #'     for a given product over the specified time period.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? No
 #'
@@ -229,7 +318,7 @@
 #' @title Finance Indexes
 #' @description
 #' Finance: Securities Price Indexes (Brazil).
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -240,7 +329,7 @@
 #' @keywords datasets
 #'
 #'#'#' @references Various public sources (b3, Br Investing, Central Bank of Brazil)
-#' @source \href{https://github.com/cefet-rj-dal/event_datasets/raw/main/original_datasets/fi_br/data/glossary.xlsx}{Glossary with complete references}
+#' @source \href{https://github.com/cefet-rj-dal/dalevents/raw/main/original_datasets/fi_br/data/glossary.xlsx}{Glossary with complete references}
 #'
 #' @examples
 #' data(fi_br)
@@ -257,7 +346,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -285,7 +374,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -313,7 +402,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -341,7 +430,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -369,7 +458,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -397,7 +486,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -425,7 +514,7 @@
 #'     time series with real and synthetic data. The real data comes from network
 #'     monitoring and cloud computing. On the other hand, synthetic data simulate
 #'     series with or without anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -451,9 +540,9 @@
 #' Data with over 900 metrics generated injecting artificial anomalies
 #'     in real streaming services. Data is organized into over 7000 variables.
 #'     For a detailed list of variables see:
-#'     \href{https://github.com/cefet-rj-dal/event_datasets_etl/blob/main/original_datasets/rare/data/rare_attributes.csv}{RARE Attributes}.
+#'     \href{https://github.com/cefet-rj-dal/dalevents_etl/blob/main/original_datasets/rare/data/rare_attributes.csv}{RARE Attributes}.
 #'     Real data from stream services and artificial labeled anomalies.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'
@@ -476,7 +565,7 @@
 #' @description
 #' Data with 250 series with real world data and synthetic and real anomalies.
 #'     Real data from human medicine, biology, meteorology and industry.
-#'     See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+#'     See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 #'     for detailed guidance on using this package and the other datasets available in it.
 #'     Labels available? Yes
 #'

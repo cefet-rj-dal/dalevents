@@ -16,7 +16,7 @@ data(gecco)
 \description{
 Data collection for water quality monitoring.
 Data Type:	Water quality. Category:	Environment. Creation Date	2018.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }

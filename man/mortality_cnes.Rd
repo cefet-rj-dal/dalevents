@@ -13,7 +13,7 @@ data(mortality_cnes)
 \description{
 Child mortality dataset. Data for assessing infant mortality,
 an important health indicator.
-See \href{https://github.com/cefet-rj-dal/event_datasets}{cefet-rj-dal/event_datasets}
+See \href{https://github.com/cefet-rj-dal/dalevents}{cefet-rj-dal/dalevents}
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }
