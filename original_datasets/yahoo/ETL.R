@@ -12,6 +12,8 @@ carrega_anomaly <- function(dir) {
       data <- read_csv(tex)
       colnames(data) <- c("idx", "value", "event")
       data$event <- as.logical(data$event)
+      data$type <- ""
+      data$type[data$event] <- "anomaly"
       dataset[[i]] <- data
       names(dataset)[i] <- tools::file_path_sans_ext(basename(tex))
     }

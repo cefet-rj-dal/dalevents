@@ -14,12 +14,20 @@ carrega <- function() {
   names(dataset) <- tolower(names(dataset))
   idx <- 1:nrow(dataset)
   gecco <- list()
-  gecco$multi <- cbind(data.frame(idx), dataset)
 
   for (i in 1:(ncol(dataset)-1)) {
     data <- dataset[,c(i,ncol(dataset))]
-    gecco[[i+1]] <- cbind(data.frame(idx), data)
-    names(gecco)[i+1] <- colnames(dataset)[i]
+    gecco[[i]] <- cbind(data.frame(idx), data)
+    names(gecco)[i] <- colnames(dataset)[i]
+  }
+
+  gecco$multi <- cbind(data.frame(idx), dataset)
+
+  for (i in 1:length(gecco)) {
+    data <- gecco[[i]]
+    data$type <- ""
+    data$type[data$event] <- "anomaly"
+    gecco[[i]] <- data
   }
 
   return(gecco)
