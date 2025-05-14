@@ -17,6 +17,7 @@ carrega <- function() {
 
   for (i in 1:(ncol(dataset)-1)) {
     data <- dataset[,c(i,ncol(dataset))]
+    colnames(data)[1] <- "value"
     gecco[[i]] <- cbind(data.frame(idx), data)
     names(gecco)[i] <- colnames(dataset)[i]
   }
