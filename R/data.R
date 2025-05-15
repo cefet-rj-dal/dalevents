@@ -268,7 +268,6 @@
 #' serie <- oil_3w_Type_8[[1]]
 "oil_3w_Type_8"
 
-
 #' @name numenta_artificialWithAnomaly
 #' @title Numenta Benchmark artificialWithAnomaly
 #' @description
