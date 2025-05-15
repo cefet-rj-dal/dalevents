@@ -17,7 +17,6 @@ plot(as.ts(gecco$multi[,2:10]))
 
 ## Univariate series selection ----------------------
 series <- gecco$ph
-plot(as.ts(series$value))
 
 #Gecco recommended sample: One day with anomalies
 series <- series[16500:18000,]

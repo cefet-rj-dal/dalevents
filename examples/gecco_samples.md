@@ -1,8 +1,6 @@
 ---
 title: "Gecco Challenge Dataset - Water Quality"
 output: html_notebook
-editor_options: 
-  chunk_output_type: inline
 ---
 Data collection for water quality monitoring
 
@@ -18,35 +16,32 @@ Source: https://www.spotseven.de/gecco/gecco-challenge
 library(dalevents)
 library(daltoolbox)
 library(harbinger)
+```
 
-
+``` r
 ## Load series ----------------------
 data(gecco)
+#Plot multivariate series
+plot(as.ts(gecco$multi[,2:10]))
 ```
+
+![plot of chunk unnamed-chunk-2](fig/gecco_samples/unnamed-chunk-2-1.png)
 
 Gecco recommended sample: One day with anomalies
 
 
 ``` r
-data <- gecco$gecco
-data <- data[16500:18000,]
-plot(as.ts(data))
-```
+## Univariate series selection ----------------------
+series <- gecco$ph
 
-![plot of chunk unnamed-chunk-2](fig/gecco_samples/unnamed-chunk-2-1.png)
-
-
-
-## Univariate series selection
-Select the desired variable directly from preprocessed data.
-
-
-``` r
-series <- data$ph
-plot(as.ts(series))
+#Gecco recommended sample: One day with anomalies
+series <- series[16500:18000,]
+plot(as.ts(series$value))
 ```
 
 ![plot of chunk unnamed-chunk-3](fig/gecco_samples/unnamed-chunk-3-1.png)
+
+
 
 ## Event detection experiment
 
@@ -61,18 +56,14 @@ model <- hanr_arima()
 
 ``` r
 #Fitting the model
-s <- Sys.time()
-model <- fit(model, series)
-t_fit <- Sys.time()-s
+model <- fit(model, series$value)
 ```
 
 
 
 ``` r
 #Making detections
-s <- Sys.time()
-detection <- detect(model, series)
-t_det <- Sys.time()-s
+detection <- detect(model, series$value)
 ```
 
 
@@ -101,7 +92,7 @@ Visual analysis
 
 ``` r
 #Ploting the results
-grf <- har_plot(model, series, detection, data$event)
+grf <- har_plot(model, series$value, detection, series$event)
 plot(grf)
 ```
 
@@ -111,7 +102,7 @@ Evaluate metrics
 
 ``` r
 #Evaluating the detection metrics
-ev <- evaluate(model, detection$event, data$event)
+ev <- evaluate(model, detection$event, series$event)
 print(ev$confMatrix)
 ```
 
