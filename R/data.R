@@ -296,7 +296,7 @@
 #' series <- data$value
 "nab_artificialWithAnomaly"
 
-#' @name numenta_realAdExchange
+#' @name nab_realAdExchange
 #' @title Numenta Anomaly Benchmark (NAB) realAdExchange
 #' @description
 #' Data collection with real-world time-series.
@@ -311,7 +311,7 @@
 #'
 #'
 #' @docType data
-#' @usage data(numenta_realAdExchange)
+#' @usage data(nab_realAdExchange)
 #' @format A list of time series.
 #' @keywords datasets
 #'
@@ -319,10 +319,10 @@
 #' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
-#' data(numenta_realAdExchange)
-#' numenta_grp <- numenta_realAdExchange[[1]]
-#' serie <- numenta_grp[[1]]
-"numenta_realAdExchange"
+#' data(nab_realAdExchange)
+#' data <- nab_realAdExchange[[1]]
+#' series <- data$value
+"nab_realAdExchange"
 
 #' @name numenta_realAWSCloudwatch
 #' @title Numenta Anomaly Benchmark (NAB) realAdExchange
