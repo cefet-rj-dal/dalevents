@@ -268,8 +268,8 @@
 #' serie <- oil_3w_Type_8[[1]]
 "oil_3w_Type_8"
 
-#' @name numenta_artificialWithAnomaly
-#' @title Numenta Benchmark artificialWithAnomaly
+#' @name nab_artificialWithAnomaly
+#' @title Numenta Anomaly Benchmark (NAB) artificialWithAnomaly
 #' @description
 #' Data collection with real-world time-series.
 #'     Artificial data with anomalies
@@ -283,21 +283,21 @@
 #'
 #'
 #' @docType data
-#' @usage data(numenta_artificialWithAnomaly)
+#' @usage data(nab_artificialWithAnomaly)
 #' @format A list of time series.
 #' @keywords datasets
 #'
 #'#'#' @references Numenta
-#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Benchmark Dataset}
+#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
-#' data(numenta_artificialWithAnomaly)
-#' numenta_grp <- numenta_artificialWithAnomaly[[1]]
-#' serie <- numenta_grp[[1]]
-"numenta_artificialWithAnomaly"
+#' data(nab_artificialWithAnomaly)
+#' data <- nab_artificialWithAnomaly[[1]]
+#' series <- data$value
+"nab_artificialWithAnomaly"
 
 #' @name numenta_realAdExchange
-#' @title Numenta Benchmark realAdExchange
+#' @title Numenta Anomaly Benchmark (NAB) realAdExchange
 #' @description
 #' Data collection with real-world time-series.
 #'     Real data with anomalies
@@ -316,7 +316,7 @@
 #' @keywords datasets
 #'
 #'#'#' @references Numenta
-#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Benchmark Dataset}
+#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
 #' data(numenta_realAdExchange)
@@ -325,7 +325,7 @@
 "numenta_realAdExchange"
 
 #' @name numenta_realAWSCloudwatch
-#' @title Numenta Benchmark realAdExchange
+#' @title Numenta Anomaly Benchmark (NAB) realAdExchange
 #' @description
 #' Data collection with real-world time-series.
 #'     Real data from AWS Cloud with anomalies
@@ -344,7 +344,7 @@
 #' @keywords datasets
 #'
 #'#'#' @references Numenta
-#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Benchmark Dataset}
+#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
 #' data(numenta_realAWSCloudwatch)
@@ -353,7 +353,7 @@
 "numenta_realAWSCloudwatch"
 
 #' @name numenta_realKnownCause
-#' @title Numenta Benchmark realKnownCause
+#' @title Numenta Anomaly Benchmark (NAB) realKnownCause
 #' @description
 #' Data collection with real-world time-series.
 #'     Real data with anomalies
@@ -372,7 +372,7 @@
 #' @keywords datasets
 #'
 #'#'#' @references Numenta
-#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Benchmark Dataset}
+#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
 #' data(numenta_realKnownCause)
@@ -381,7 +381,7 @@
 "numenta_realKnownCause"
 
 #' @name numenta_realTraffic
-#' @title Numenta Benchmark realTraffic
+#' @title Numenta Anomaly Benchmark (NAB) realTraffic
 #' @description
 #' Data collection with real-world time-series.
 #'     Real data from online data traffic with anomalies
@@ -400,7 +400,7 @@
 #' @keywords datasets
 #'
 #'#'#' @references Numenta
-#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Benchmark Dataset}
+#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
 #' data(numenta_realTraffic)
@@ -409,7 +409,7 @@
 "numenta_realTraffic"
 
 #' @name numenta_realTweets
-#' @title Numenta Benchmark realTraffic
+#' @title Numenta Anomaly Benchmark (NAB) realTraffic
 #' @description
 #' Data collection with real-world time-series.
 #'     Real data from Tweets with anomalies
@@ -428,7 +428,7 @@
 #' @keywords datasets
 #'
 #'#'#' @references Numenta
-#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Benchmark Dataset}
+#' @source \href{https://github.com/numenta/NAB/tree/master/data}{Numenta Anomaly Benchmark (NAB) Dataset}
 #'
 #' @examples
 #' data(numenta_realTweets)
