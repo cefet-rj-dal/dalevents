@@ -18,15 +18,17 @@ library(harbinger)
 
 
 ## Load series ----------------------
-data(numenta_realAdExchange)
+data(nab_artificialWithAnomaly)
 ```
 
 
 Univerariate use - Example 1:
 ```{r}
 #Univerariate use
-data <- numenta_realAdExchange$realAdExchange$`exchange-3_cpc_resul`
-plot(as.ts(data))
+data <- nab_artificialWithAnomaly[[1]]
+
+plot(as.ts(data[,2:3]),
+     main=names(nab_artificialWithAnomaly[1]))
 ```
 
 ## Event detection experiment
@@ -42,17 +44,13 @@ model <- hanr_arima()
 
 ```{r}
 #Fitting the model
-s <- Sys.time()
 model <- fit(model, data$value)
-t_fit <- Sys.time()-s
 ```
 
 
 ```{r}
 #Making detections
-s <- Sys.time()
 detection <- detect(model, data$value)
-t_det <- Sys.time()-s
 ```
 
 
@@ -76,4 +74,3 @@ Evaluate metrics
 ev <- evaluate(model, detection$event, data$event)
 print(ev$confMatrix)
 ```
-

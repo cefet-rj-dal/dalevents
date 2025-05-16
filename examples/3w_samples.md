@@ -32,22 +32,22 @@ summary(data)
 ```
 
 ```
-##      P_PDG       P_TPT              T_TPT         P_MON_CKP         T_JUS_CKP    
-##  Min.   :0   Min.   :17435930   Min.   :116.9   Min.   :7950450   Min.   :75.35  
-##  1st Qu.:0   1st Qu.:17472050   1st Qu.:117.2   1st Qu.:7981696   1st Qu.:76.30  
-##  Median :0   Median :17598880   Median :117.4   Median :8122462   Median :77.98  
-##  Mean   :0   Mean   :17739948   Mean   :117.4   Mean   :8294544   Mean   :77.62  
-##  3rd Qu.:0   3rd Qu.:17929330   3rd Qu.:117.5   3rd Qu.:8495280   3rd Qu.:78.96  
-##  Max.   :0   Max.   :18433410   Max.   :117.7   Max.   :9366608   Max.   :79.12  
-##                                                                                  
-##    P_JUS_CKGL      T_JUS_CKGL          QGL        class      
-##  Min.   :-300918   Mode:logical   Min.   :0   Min.   :  0.0  
-##  1st Qu.:-300918   NA's:12505     1st Qu.:0   1st Qu.:101.0  
-##  Median :-300918                  Median :0   Median :101.0  
-##  Mean   :-300918                  Mean   :0   Mean   : 78.9  
-##  3rd Qu.:-300918                  3rd Qu.:0   3rd Qu.:101.0  
-##  Max.   :-300918                  Max.   :0   Max.   :101.0  
-##                                               NA's   :65
+##      P_PDG       P_TPT              T_TPT         P_MON_CKP         T_JUS_CKP       P_JUS_CKGL     
+##  Min.   :0   Min.   :17435930   Min.   :116.9   Min.   :7950450   Min.   :75.35   Min.   :-300918  
+##  1st Qu.:0   1st Qu.:17472050   1st Qu.:117.2   1st Qu.:7981696   1st Qu.:76.30   1st Qu.:-300918  
+##  Median :0   Median :17598880   Median :117.4   Median :8122462   Median :77.98   Median :-300918  
+##  Mean   :0   Mean   :17739948   Mean   :117.4   Mean   :8294544   Mean   :77.62   Mean   :-300918  
+##  3rd Qu.:0   3rd Qu.:17929330   3rd Qu.:117.5   3rd Qu.:8495280   3rd Qu.:78.96   3rd Qu.:-300918  
+##  Max.   :0   Max.   :18433410   Max.   :117.7   Max.   :9366608   Max.   :79.12   Max.   :-300918  
+##                                                                                                    
+##  T_JUS_CKGL          QGL        class      
+##  Mode:logical   Min.   :0   Min.   :  0.0  
+##  NA's:12505     1st Qu.:0   1st Qu.:101.0  
+##                 Median :0   Median :101.0  
+##                 Mean   :0   Mean   : 78.9  
+##                 3rd Qu.:0   3rd Qu.:101.0  
+##                 Max.   :0   Max.   :101.0  
+##                             NA's   :65
 ```
 
 ## Preprocessing
@@ -72,20 +72,42 @@ plot(as.ts(data))
 ts <- data[,1:7]
 
 preproc <- ts_norm_gminmax()
-preproc <- fit(preproc, ts)
-ts <- transform(preproc, ts)
+```
 
+```
+## Error in ts_norm_gminmax(): could not find function "ts_norm_gminmax"
+```
+
+``` r
+preproc <- fit(preproc, ts)
+```
+
+```
+## Error: object 'preproc' not found
+```
+
+``` r
+ts <- transform(preproc, ts)
+```
+
+```
+## Error: object 'preproc' not found
+```
+
+``` r
 head(ts)
 ```
 
 ```
-##        P_PDG P_TPT      T_TPT P_MON_CKP T_JUS_CKP P_JUS_CKGL        QGL
-## 1 0.01606238     1 0.01606862 0.5160327 0.0160664          0 0.01606238
-## 2 0.01606238     1 0.01606862 0.5160324 0.0160664          0 0.01606238
-## 3 0.01606238     1 0.01606862 0.5160322 0.0160664          0 0.01606238
-## 4 0.01606238     1 0.01606862 0.5160318 0.0160664          0 0.01606238
-## 5 0.01606238     1 0.01606862 0.5160316 0.0160664          0 0.01606238
-## 6 0.01606238     1 0.01606862 0.5160314 0.0160664          0 0.01606238
+## # A tibble: 6 × 7
+##   P_PDG    P_TPT T_TPT P_MON_CKP T_JUS_CKP P_JUS_CKGL   QGL
+##   <dbl>    <dbl> <dbl>     <dbl>     <dbl>      <dbl> <dbl>
+## 1     0 18433410  117.   9366608      75.3   -300918.     0
+## 2     0 18433410  117.   9366602      75.3   -300918.     0
+## 3     0 18433410  117.   9366598      75.3   -300918.     0
+## 4     0 18433410  117.   9366592      75.3   -300918.     0
+## 5     0 18433410  117.   9366588      75.3   -300918.     0
+## 6     0 18433410  117.   9366583      75.3   -300918.     0
 ```
 
 ``` r
@@ -221,10 +243,10 @@ head(experiment)
 ```
 
 ```
-##       method dataset                                     series elapsed_time_fit
-## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP                0
-##   elapsed_time_detection accuracy precision recall F1
-## 1                      0        0         0      0  0
+##       method dataset                                     series elapsed_time_fit elapsed_time_detection
+## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP                0                      0
+##   accuracy precision recall F1
+## 1        0         0      0  0
 ```
 Detection steps
 
@@ -310,10 +332,10 @@ print(experiment)
 ```
 
 ```
-##       method dataset                                     series elapsed_time_fit
-## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP         2.567382
-##   elapsed_time_detection  accuracy precision recall  F1
-## 1              0.2695227 0.9996801         0      0 NaN
+##       method dataset                                     series elapsed_time_fit elapsed_time_detection
+## 1 hanr_arima      3W Type_1_WELL_00001_20140124213136_P_MON_CKP          3.84058              0.2335167
+##    accuracy precision recall  F1
+## 1 0.9996801         0      0 NaN
 ```
 
 ### SoftEd Evaluation

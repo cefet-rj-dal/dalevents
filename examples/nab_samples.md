@@ -19,7 +19,11 @@ library(harbinger)
 
 
 ## Load series ----------------------
-data(numenta_realAdExchange)
+data(nab_artificialWithAnomaly)
+```
+
+```
+## Warning in data(nab_artificialWithAnomaly): data set 'nab_artificialWithAnomaly' not found
 ```
 
 
@@ -27,8 +31,10 @@ Univerariate use - Example 1:
 
 ``` r
 #Univerariate use
-data <- numenta_realAdExchange$realAdExchange$`exchange-3_cpc_resul`
-plot(as.ts(data))
+data <- nab_artificialWithAnomaly[[1]]
+
+plot(as.ts(data[,2:3]),
+     main=names(nab_artificialWithAnomaly[1]))
 ```
 
 ![plot of chunk unnamed-chunk-2](fig/nab_samples/unnamed-chunk-2-1.png)
@@ -48,18 +54,14 @@ model <- hanr_arima()
 
 ``` r
 #Fitting the model
-s <- Sys.time()
 model <- fit(model, data$value)
-t_fit <- Sys.time()-s
 ```
 
 
 
 ``` r
 #Making detections
-s <- Sys.time()
 detection <- detect(model, data$value)
-t_det <- Sys.time()-s
 ```
 
 
@@ -72,13 +74,35 @@ print(detection |> dplyr::filter(event==TRUE))
 ```
 
 ```
-##    idx event    type
-## 1   24  TRUE anomaly
-## 2  174  TRUE anomaly
-## 3  297  TRUE anomaly
-## 4  439  TRUE anomaly
-## 5  977  TRUE anomaly
-## 6 1122  TRUE anomaly
+##     idx event    type
+## 1   109  TRUE anomaly
+## 2   217  TRUE anomaly
+## 3   397  TRUE anomaly
+## 4   505  TRUE anomaly
+## 5   685  TRUE anomaly
+## 6   793  TRUE anomaly
+## 7   973  TRUE anomaly
+## 8  1081  TRUE anomaly
+## 9  1261  TRUE anomaly
+## 10 1369  TRUE anomaly
+## 11 1549  TRUE anomaly
+## 12 1657  TRUE anomaly
+## 13 1837  TRUE anomaly
+## 14 1945  TRUE anomaly
+## 15 2125  TRUE anomaly
+## 16 2233  TRUE anomaly
+## 17 2413  TRUE anomaly
+## 18 2521  TRUE anomaly
+## 19 2701  TRUE anomaly
+## 20 2809  TRUE anomaly
+## 21 2881  TRUE anomaly
+## 22 3157  TRUE anomaly
+## 23 3277  TRUE anomaly
+## 24 3385  TRUE anomaly
+## 25 3565  TRUE anomaly
+## 26 3673  TRUE anomaly
+## 27 3853  TRUE anomaly
+## 28 3961  TRUE anomaly
 ```
 
 Visual analysis
@@ -102,7 +126,6 @@ print(ev$confMatrix)
 ```
 ##           event      
 ## detection TRUE  FALSE
-## TRUE      2     4    
-## FALSE     1     1531
+## TRUE      1     27   
+## FALSE     0     4004
 ```
-
