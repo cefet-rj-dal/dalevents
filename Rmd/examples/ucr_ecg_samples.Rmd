@@ -1,0 +1,78 @@
+---
+title: "UCR Anomaly Archive - ECG Series"
+output: html_notebook
+---
+Real data from human medicine, biology, meteorology and industry
+
+* Selection with ECG data series
+* Univariate series with labeled anomalies
+* Recommended use: univariate anomaly detection
+
+Source: https://paperswithcode.com/dataset/ucr-anomaly-archive
+
+
+## Load series
+```{r}
+library(dalevents)
+library(daltoolbox)
+library(harbinger)
+```
+
+Selecting a well as example
+```{r}
+## Load series ----------------------
+data(ucr_ecg)
+```
+
+
+```{r}
+#Selecting series
+series <- ucr_ecg[[3]]
+plot(as.ts(series$value))
+```
+
+
+
+
+## Event detection experiment
+
+Detection steps
+```{r}
+#Establishing arima method
+model <- hanr_arima()
+```
+
+
+```{r}
+#Fitting the model
+model <- fit(model, series$value)
+```
+
+
+```{r}
+#Making detections
+detection <- detect(model, series$value)
+```
+
+
+## Results analysis
+
+```{r}
+#Filtering detected events
+print(detection |> dplyr::filter(event==TRUE))
+```
+
+Visual analysis
+```{r}
+#Ploting the results
+grf <- har_plot(model, series$value, detection, series$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+#Evaluating the detection metrics
+ev <- evaluate(model, detection$event, series$event)
+print(ev$confMatrix)
+```
+

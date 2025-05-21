@@ -1,0 +1,75 @@
+---
+title: "Numenta Anomaly Benchmark (NAB)  Dataset - Cloud services and synthetic data"
+output: html_notebook
+---
+
+NAB is a novel benchmark for evaluating algorithms for anomaly detection in streaming, real-time applications.
+
+* Univariate series with labeled anomalies
+* Recommended use: univariate event detection
+
+Source: https://www.numenta.com/
+
+## Load series
+```{r}
+library(dalevents)
+library(daltoolbox)
+library(harbinger)
+```
+
+
+Univerariate use - Example 1:
+```{r}
+## Load series ----------------------
+data(nab_artificialWithAnomaly)
+
+#Univerariate use
+data <- nab_artificialWithAnomaly[[1]]
+
+plot(as.ts(data[,2:3]),
+     main=names(nab_artificialWithAnomaly[1]))
+```
+
+## Event detection experiment
+
+
+
+Detection steps
+```{r}
+#Establishing arima method
+model <- hanr_arima()
+```
+
+
+```{r}
+#Fitting the model
+model <- fit(model, data$value)
+```
+
+
+```{r}
+#Making detections
+detection <- detect(model, data$value)
+```
+
+
+## Results analysis
+
+```{r}
+#Filtering detected events
+print(detection |> dplyr::filter(event==TRUE))
+```
+
+Visual analysis
+```{r}
+#Ploting the results
+grf <- har_plot(model, data$value, detection, data$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+#Evaluating the detection metrics
+ev <- evaluate(model, detection$event, data$event)
+print(ev$confMatrix)
+```

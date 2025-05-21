@@ -1,0 +1,80 @@
+---
+title: "Gecco Challenge Dataset - Water Quality"
+output: html_notebook
+---
+Data collection for water quality monitoring
+
+* Multivariate series with labeled anomalies.
+* Recommended use: multivariate or univariate event detection
+
+Source: https://www.spotseven.de/gecco/gecco-challenge
+
+
+## Load series
+```{r}
+library(dalevents)
+library(daltoolbox)
+library(harbinger)
+```
+```{r}
+## Load series ----------------------
+data(gecco)
+#Plot multivariate series
+plot(as.ts(gecco$multi[,2:10]))
+```
+
+Gecco recommended sample: One day with anomalies
+
+```{r}
+## Univariate series selection ----------------------
+series <- gecco$ph
+
+#Gecco recommended sample: One day with anomalies
+series <- series[16500:18000,]
+plot(as.ts(series$value))
+```
+
+
+
+## Event detection experiment
+
+Detection steps
+```{r}
+#Establishing arima method
+model <- hanr_arima()
+```
+
+
+```{r}
+#Fitting the model
+model <- fit(model, series$value)
+```
+
+
+```{r}
+#Making detections
+detection <- detect(model, series$value)
+```
+
+
+## Results analysis
+
+
+```{r}
+#Filtering detected events
+print(detection |> dplyr::filter(event==TRUE))
+```
+
+Visual analysis
+```{r}
+#Ploting the results
+grf <- har_plot(model, series$value, detection, series$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+#Evaluating the detection metrics
+ev <- evaluate(model, detection$event, series$event)
+print(ev$confMatrix)
+```
