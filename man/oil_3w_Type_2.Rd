@@ -27,10 +27,7 @@ Labels available? Yes
 data(oil_3w_Type_2)
 serie <- oil_3w_Type_2[[1]]
 }
-\keyword{#'}
-\keyword{3W}
-\keyword{@references}
-\keyword{Data}
-\keyword{Set}
-\keyword{dataset}
+\references{
+3W dataset Data Set
+}
 \keyword{datasets}

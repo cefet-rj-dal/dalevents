@@ -24,17 +24,7 @@ Labels available? Yes
 data(gecco)
 serie <- gecco[[1]]
 }
-\keyword{#'}
-\keyword{(ACM)}
-\keyword{(Gecco),}
-\keyword{@references}
-\keyword{Association}
-\keyword{Computation}
-\keyword{Computing}
-\keyword{Conference}
-\keyword{Evolutionary}
-\keyword{Genetic}
-\keyword{Machinery}
-\keyword{and}
+\references{
+Genetic and Evolutionary Computation Conference (Gecco), Association for Computing Machinery (ACM)
+}
 \keyword{datasets}
-\keyword{for}

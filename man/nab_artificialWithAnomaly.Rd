@@ -29,7 +29,7 @@ data(nab_artificialWithAnomaly)
 data <- nab_artificialWithAnomaly[[1]]
 series <- data$value
 }
-\keyword{#'#'}
-\keyword{@references}
-\keyword{Numenta}
+\references{
+Numenta
+}
 \keyword{datasets}

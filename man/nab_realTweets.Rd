@@ -29,7 +29,7 @@ data(nab_realTweets)
 nab_grp <- nab_realTweets[[1]]
 serie <- nab_grp[[1]]
 }
-\keyword{#'#'}
-\keyword{@references}
-\keyword{Numenta}
+\references{
+Numenta
+}
 \keyword{datasets}

@@ -29,7 +29,7 @@ data(nab_realAdExchange)
 data <- nab_realAdExchange[[1]]
 series <- data$value
 }
-\keyword{#'#'}
-\keyword{@references}
-\keyword{Numenta}
+\references{
+Numenta
+}
 \keyword{datasets}

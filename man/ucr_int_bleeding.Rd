@@ -25,9 +25,7 @@ data(ucr_int_bleeding)
 data <- ucr_int_bleeding[[1]]
 series <- data$value
 }
-\keyword{#'#'}
-\keyword{@references}
-\keyword{Anomaly}
-\keyword{Archive}
-\keyword{UCR}
+\references{
+UCR Anomaly Archive
+}
 \keyword{datasets}

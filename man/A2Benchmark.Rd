@@ -8,7 +8,7 @@
 A list of time series.
 }
 \source{
-\href{https://doi.org/10.1371/journal.pone.0262463}{Yahoo dataset, 2021}
+\doi{10.1371/journal.pone.0262463}
 }
 \usage{
 data(A2Benchmark)
@@ -16,7 +16,7 @@ data(A2Benchmark)
 \description{
 S5 - A Labeled Anomaly Detection Dataset.
 Data Type:	Benchmark A2. Category:	Synthetic data. Creation Date	2021.
-See \href{https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70}{cefet-rj-dal/dalevents}
+See Yahoo Sandbox Webscope for detailed information of the dataset.
 for detailed guidance on using this package and the other datasets available in it.
 Labels available? Yes
 }
@@ -24,28 +24,7 @@ Labels available? Yes
 data(A2Benchmark)
 serie <- A2Benchmark[[1]]
 }
-\keyword{#'}
-\keyword{(2022)}
-\keyword{17(1).}
-\keyword{@references}
-\keyword{A}
-\keyword{An}
-\keyword{K}
-\keyword{K,}
-\keyword{ONE}
-\keyword{PLoS}
-\keyword{Takahashi}
-\keyword{Web}
-\keyword{Yoshihara}
-\keyword{anomaly}
-\keyword{application}
-\keyword{data.}
+\references{
+Yoshihara K, Takahashi K (2022) A simple method for unsupervised anomaly detection: An application to Web time series data. PLoS ONE 17(1).
+}
 \keyword{datasets}
-\keyword{detection:}
-\keyword{for}
-\keyword{method}
-\keyword{series}
-\keyword{simple}
-\keyword{time}
-\keyword{to}
-\keyword{unsupervised}

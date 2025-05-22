@@ -29,7 +29,7 @@ data(nab_realKnownCause)
 nab_grp <- nab_realKnownCause[[1]]
 serie <- nab_grp[[1]]
 }
-\keyword{#'#'}
-\keyword{@references}
-\keyword{Numenta}
+\references{
+Numenta
+}
 \keyword{datasets}

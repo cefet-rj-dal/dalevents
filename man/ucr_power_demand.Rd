@@ -25,9 +25,7 @@ data(ucr_power_demand)
 data <- ucr_power_demand[[1]]
 series <- data$value
 }
-\keyword{#'#'}
-\keyword{@references}
-\keyword{Anomaly}
-\keyword{Archive}
-\keyword{UCR}
+\references{
+UCR Anomaly Archive
+}
 \keyword{datasets}
