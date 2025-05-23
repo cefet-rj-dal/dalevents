@@ -39,11 +39,11 @@ Select the desired variable directly from preprocessed data.
 
 
 ``` r
-series <- data$p_mon_ckp
+series <- data$p_tpt
 plot(as.ts(series))
 ```
 
-![plot of chunk unnamed-chunk-4](fig/3w_samples/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-17](fig/3w_samples/unnamed-chunk-17-1.png)
 
 ## Event detection experiment
 
@@ -52,7 +52,7 @@ Detection steps
 
 ``` r
 #Establishing arima method
-model <- hanr_arima()
+model <- hcp_binseg()
 ```
 
 
@@ -69,6 +69,12 @@ model <- fit(model, series)
 detection <- detect(model, series)
 ```
 
+```
+## Warning in BINSEG(sumstat, pen = pen.value, cost_func = costfunc, minseglen = minseglen, : The number
+## of changepoints identified is Q, it is advised to increase Q to make sure changepoints have not been
+## missed.
+```
+
 
 ## Results analysis
 
@@ -80,9 +86,9 @@ print(detection |> dplyr::filter(event==TRUE))
 ```
 
 ```
-##    idx event    type
-## 1  991  TRUE anomaly
-## 2 1081  TRUE anomaly
+##     idx event        type
+## 1   994  TRUE changepoint
+## 2 11453  TRUE changepoint
 ```
 
 Visual analysis
@@ -93,7 +99,7 @@ grf <- har_plot(model, series, detection, data$event)
 plot(grf)
 ```
 
-![plot of chunk unnamed-chunk-9](fig/3w_samples/unnamed-chunk-9-1.png)
+![plot of chunk unnamed-chunk-22](fig/3w_samples/unnamed-chunk-22-1.png)
 
 Evaluate metrics
 
@@ -111,6 +117,22 @@ print(ev$confMatrix)
 ```
 
 
+``` r
+ev$accuracy
+```
+
+```
+## [1] 0.9996801
+```
+
+``` r
+ev$F1
+```
+
+```
+## [1] NaN
+```
+
 ### SoftEd Evaluation
 To analyze the results considering temporal tolerance, softED smoothed metrics can be used, as performed below.
 
@@ -123,8 +145,8 @@ print(ev_soft$confMatrix)
 ```
 ##           event         
 ## detection TRUE  FALSE   
-## TRUE      0.71  1.29    
-## FALSE     1.29  12501.71
+## TRUE      0.74  1.26    
+## FALSE     1.26  12501.74
 ```
 
 
@@ -133,7 +155,7 @@ ev_soft$accuracy
 ```
 
 ```
-## [1] 0.9997939
+## [1] 0.9997992
 ```
 
 ``` r
@@ -141,5 +163,5 @@ ev_soft$F1
 ```
 
 ```
-## [1] 0.3555556
+## [1] 0.3722222
 ```

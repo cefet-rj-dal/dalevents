@@ -35,7 +35,7 @@ data <- oil_3w_Type_1[[1]]
 Select the desired variable directly from preprocessed data.
 
 ```{r}
-series <- data$p_mon_ckp
+series <- data$p_tpt
 plot(as.ts(series))
 ```
 
@@ -45,7 +45,7 @@ plot(as.ts(series))
 Detection steps
 ```{r}
 #Establishing arima method
-model <- hanr_arima()
+model <- hcp_binseg()
 ```
 
 
@@ -83,6 +83,10 @@ ev <- evaluate(model, detection$event, data$event)
 print(ev$confMatrix)
 ```
 
+```{r}
+ev$accuracy
+ev$F1
+```
 
 ### SoftEd Evaluation
 To analyze the results considering temporal tolerance, softED smoothed metrics can be used, as performed below.
