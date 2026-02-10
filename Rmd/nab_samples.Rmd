@@ -1,0 +1,82 @@
+---
+title: "Numenta Anomaly Benchmark (NAB) — Cloud Services and Synthetic Data"
+output: html_notebook
+---
+
+Overview
+
+This notebook demonstrates univariate anomaly detection using series from the
+Numenta Anomaly Benchmark (NAB). We will load a synthetic series, train a simple
+detector, visualize predictions, and compute metrics.
+
+Dataset notes
+- Univariate series with labeled anomalies
+- Recommended use: univariate event detection
+- Source: https://www.numenta.com/
+
+## Load packages and dataset
+Load the required packages for data access, modeling, visualization, and evaluation.
+```{r}
+library(united)
+library(daltoolbox)
+library(harbinger)
+```
+
+
+Univariate use — Example 1
+```{r}
+## Load series ----------------------
+data(nab_artificialWithAnomaly)
+
+# Select the first series from the collection
+data <- nab_artificialWithAnomaly[[1]]
+
+# Visualize value and label columns
+plot(as.ts(data[, 2:3]),
+     main = names(nab_artificialWithAnomaly[1]))
+```
+
+## Event detection experiment
+Define a baseline detector and generate anomaly predictions.
+```{r}
+# Establish ARIMA-based detector
+model <- hanr_arima()
+```
+
+
+```{r}
+# Fit the model on the value series
+model <- fit(model, data$value)
+```
+
+
+```{r}
+# Produce anomaly detections
+detection <- detect(model, data$value)
+```
+
+
+## Results analysis
+Inspect detected positives, plot overlays, and compute metrics.
+```{r}
+# Show detected positives only
+print(detection |> dplyr::filter(event == TRUE))
+```
+
+Visual analysis
+```{r}
+# Plot predictions (blue) over true labels (red bands)
+grf <- har_plot(model, data$value, detection, data$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+# Point-wise evaluation (no temporal tolerance)
+ev <- evaluate(model, detection$event, data$event)
+print(ev$confMatrix)
+```
+
+## References
+
+- Lavin, A., & Ahmad, S. (2015). Evaluating real-time anomaly detection algorithms — the Numenta Anomaly Benchmark. 2015 IEEE 14th International Conference on Machine Learning and Applications (ICMLA).

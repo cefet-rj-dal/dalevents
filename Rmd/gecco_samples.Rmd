@@ -1,0 +1,86 @@
+---
+title: "GECCO Challenge — Water Quality"
+output: html_notebook
+---
+
+Overview
+
+This notebook uses the GECCO water quality challenge data to illustrate anomaly
+detection in multivariate environmental time series. We will:
+
+- Load the dataset and visualize the multivariate stream
+- Select a univariate sensor for a focused experiment
+- Train a baseline detector and evaluate results
+
+Dataset notes
+- Multivariate series with labeled anomalies
+- Recommended use: multivariate or univariate event detection
+- Source: https://www.spotseven.de/gecco/gecco-challenge
+
+## Load packages and dataset
+Load the required packages for data access, modeling, visualization, and evaluation.
+```{r}
+library(united)
+library(daltoolbox)
+library(harbinger)
+```
+```{r}
+## Load series ----------------------
+data(gecco)
+# Plot selected multivariate columns
+plot(as.ts(gecco$multi[, 2:10]))
+```
+
+GECCO recommended sample: one day with anomalies
+
+```{r}
+## Univariate series selection ----------------------
+series <- gecco$ph
+
+# Subset to a recommended one-day window with anomalies
+series <- series[16500:18000, ]
+plot(as.ts(series$value))
+```
+
+## Event detection experiment
+Define a baseline detector and generate anomaly predictions.
+```{r}
+# Establish ARIMA-based detector
+model <- hanr_arima()
+```
+
+```{r}
+# Fit the model on the value series
+model <- fit(model, series$value)
+```
+
+```{r}
+# Produce anomaly detections
+detection <- detect(model, series$value)
+```
+
+## Results analysis
+Inspect positives, plot overlays, and compute metrics.
+
+```{r}
+# Show detected positives
+print(detection |> dplyr::filter(event == TRUE))
+```
+
+Visual analysis
+```{r}
+# Plot predictions (blue) versus true labels (red bands)
+grf <- har_plot(model, series$value, detection, series$event)
+plot(grf)
+```
+
+Evaluate metrics
+```{r}
+# Point-wise evaluation (no temporal tolerance)
+ev <- evaluate(model, detection$event, series$event)
+print(ev$confMatrix)
+```
+
+## References
+
+- Chandola, V., Banerjee, A., & Kumar, V. (2009). Anomaly detection: A survey. ACM Computing Surveys, 41(3), 1–58.

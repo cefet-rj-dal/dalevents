@@ -1,0 +1,2 @@
+https://github.com/numenta/NAB/tree/master/data
+https://www.numenta.com/assets/pdf/numenta-anomaly-benchmark/NAB-Data-Sheet.pdf

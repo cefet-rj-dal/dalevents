@@ -1,0 +1,15 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^develop$
+^harbinger$
+^harbinger-backup$
+^examples$
+^Rmd$
+^etl$
+package.R

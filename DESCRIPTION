@@ -1,0 +1,20 @@
+Package: united
+Title: A Unified Event Detection Dataset powered by DAL
+Version: 1.1.707
+License: MIT + file LICENSE
+Authors@R: 
+  c(
+    person(given = "Janio", family = "Lima", email = "janio.lima@aluno.cefet-rj.br", role = "aut"),
+    person(given = "Eduardo", family = "Ogasawara", email = "eogasawara@ieee.org", role = c("aut", "ths", "cre"))
+  )
+Description: Provides a collection of time series datasets for event detection tasks. This package organizes datasets intended for the development, training, and evaluation of methods for time series event detection. Each dataset is structured as a 'list' and is accompanied by documentation describing its origin and characteristics. Priority is given to labeled datasets to support the evaluation of method performance in experimental studies. It can be used at Harbinger, which contains several state-of-the-art methods described in Salles et al. (2020)  <doi:10.5753/sbbd.2020.13626>.
+URL: https://cefet-rj-dal.github.io/united/, https://github.com/cefet-rj-dal/united
+BugReports: https://github.com/cefet-rj-dal/united/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.1.0)
+RoxygenNote: 7.3.3
+LazyData: true
+LazyDataCompression: xz
+Imports: 
+  harbinger

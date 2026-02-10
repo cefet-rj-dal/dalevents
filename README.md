@@ -1,0 +1,108 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# UniTED: A Unified Time Series Event Detection Repository powered by DAL
+
+<!-- badges: start -->
+
+![GitHub Repo stars](https://github.com/cefet-rj-dal/united)
+<!-- badges: end -->
+
+The Unified Event Detection Dataset (UniTED), powered by DAL, is a
+curated repository of time series datasets for the development and
+evaluation of event and anomaly detection methods. It primarily includes
+labeled datasets to enable consistent benchmarking and reproducible
+experiments.
+
+This repository contains: - The R package that exposes dataset objects
+(see `?data` topics and `man/`) - The data files shipped for package use
+(`data/*.RData`) - The ETL pipelines used to build those data files
+(`etl/`), separated into: - `source/`: original or labeled inputs used
+by ETL - `intermediate/`: zipped files and grouped lists produced during
+processing - final artifacts are saved under the repo root `data/`
+
+We recommend accessing datasets via this package to ensure standardized
+structures and metadata.
+
+------------------------------------------------------------------------
+
+## Dataset Description
+
+- Full dataset descriptions:
+  <https://github.com/cefet-rj-dal/united/wiki>
+- Example notebooks: `Rmd/examples` and rendered versions in `examples/`
+- ETL documentation: one README per dataset under
+  `etl/<dataset>/README.md`
+
+------------------------------------------------------------------------
+
+## Examples
+
+Usage examples are organized by dataset:
+<https://github.com/cefet-rj-dal/united/tree/main/examples/>
+
+``` r
+library(united)
+# Load mini dataset and fetch full version
+data(A1Benchmark)
+A1Benchmark <- loadfulldata(A1Benchmark)
+#> Registered S3 method overwritten by 'quantmod':
+#>   method            from
+#>   as.zoo.data.frame zoo
+#> Registered S3 methods overwritten by 'forecast':
+#>   method  from 
+#>   head.ts stats
+#>   tail.ts stats
+```
+
+------------------------------------------------------------------------
+
+## Installation
+
+You can install the published version of UniTED package from GitHub
+<https://github.com/cefet-rj-dal/united> with:
+
+``` r
+timeout <- options()$timeout
+options(timeout=1200)
+devtools::install_github("cefet-rj-dal/united", upgrade="never")
+options(timeout=timeout)
+```
+
+## Bugs and new features request
+
+<https://github.com/cefet-rj-dal/united/issues>
+
+------------------------------------------------------------------------
+
+## ETL Generation
+
+The `etl/` folder hosts dataset‑specific ETL pipelines that produce the
+final RData files included in the package. Each dataset folder (e.g.,
+`etl/numenta`, `etl/ucr_anomaly`, `etl/yahoo`, `etl/3W`, `etl/mit-bih`,
+`etl/gecco`) contains:
+
+- `source/`: the labeled inputs used by builder scripts
+- `intermediate/`: zipped/raw conversions and grouped list artifacts
+- builder scripts: numbered `*.R` files that specify the ETL order and
+  outputs
+- a README with origin links, field descriptions, and script references
+
+Final artifacts are placed in the root `data/` directory and documented
+in `R/united.R`. To reproduce data, run the numbered scripts inside
+`etl/<dataset>/`.
+
+------------------------------------------------------------------------
+
+## References
+
+- Lima, J., Castro, H., Oliveira, L., Paixão, E., Baroni, L., Salles, R., 
+  Vargas, R., Ogasawara, E. UniTED: A Unified Time Series 
+  Event Detection Repository. Brazilian e-Science Workshop (BreSci). 
+  In: Brazilian e-Science Workshop (BreSci). SBC, DOI: 10.5753/bresci.2025.247972. 
+Chandola, V., Banerjee, A., & Kumar, V. (2009). Anomaly detection: A
+  survey. ACM Computing Surveys, 41(3), 1–58.
+- Truong, C., Oudre, L., & Vayatis, N. (2020). Selective review of
+  change point detection methods. Signal Processing, 167, 107299.
+- Lavin, A., & Ahmad, S. (2015). Evaluating real-time anomaly detection
+  algorithms — the Numenta Anomaly Benchmark. 2015 IEEE 14th ICMLA.
