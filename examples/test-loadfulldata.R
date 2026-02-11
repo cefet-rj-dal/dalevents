@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-library(united)
+library(harbinger)
 
 # 1
 data(A1Benchmark)
